@@ -17,8 +17,22 @@ function getComputerChoice() {
         return computerChoice = "scissors";
     }
 
-    
-
 }
 
 console.log(getComputerChoice())
+
+function getUserChoice() {
+
+    let userChoice = prompt("Enter: rock, paper or scissors:", '');
+
+    if (userChoice === null || userChoice === '') {
+        alert("Canceled.");
+    } else if (userChoice.toLowerCase() === "rock" || userChoice.toLowerCase() === "paper" || userChoice.toLowerCase() === "scissors") {
+        return userChoice.toLowerCase();
+    } else {
+        alert("Invalid input.");
+    }
+
+}
+
+console.log(getUserChoice())
