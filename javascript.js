@@ -1,5 +1,3 @@
-let userScore = 0;
-let computerScore = 0;
 
 function getComputerChoice() {
 
@@ -29,50 +27,80 @@ function getUserChoice() {
     if (userChoice === null || userChoice === '') {
         alert("Canceled.");
     } else if (userChoice.toLowerCase() === "rock" || userChoice.toLowerCase() === "paper" || userChoice.toLowerCase() === "scissors") {
-        return userChoice.toLowerCase();
+        return userChoice;
     } else {
         alert("Invalid input.");
     }
 
 }
 
-function playRound(userChoice, computerChoice) {
+function playGame() {
 
-    if (userChoice === computerChoice) {
-        console.log(`It's draw! Both you and computer chose ${userChoice}.`)
+    let userScore = 0;
+    let computerScore = 0;
 
-    } else if (userChoice === "rock" && computerChoice === "paper") {
-        computerScore += 1;
-        console.log('You lose! Paper beats rock.')
+    let userSelection = getUserChoice();
+    let computerSelection = getComputerChoice();
+    
+    playRound(userSelection, computerSelection);
 
-    } else if (userChoice === "rock" && computerChoice === "scissors") {
-        userScore += 1;
-        console.log('You win! Rock beats scissors.')
+    userSelection = getUserChoice();
+    computerSelection = getComputerChoice();
+    playRound(userSelection, computerSelection);
 
-    } else if (userChoice === "scissors" && computerChoice === "rock") {
-        computerScore += 1;
-        console.log("You lose! Rock beats scissors.")
+    userSelection = getUserChoice();
+    computerSelection = getComputerChoice();
+    playRound(userSelection, computerSelection);
 
-    } else if (userChoice === "scissors" && computerChoice === "paper") {
-        userScore += 1;
-        console.log("You win! Scissors beat paper")
+    userSelection = getUserChoice();
+    computerSelection = getComputerChoice();
+    playRound(userSelection, computerSelection);
 
-    } else if (userChoice === "paper" && computerChoice === "scissors") {
-        computerScore += 1;
-        console.log("You lose! Scissors beats paper.")
+    userSelection = getUserChoice();
+    computerSelection = getComputerChoice();
+    playRound(userSelection, computerSelection);
 
-    } else if (userChoice === "paper" && computerChoice === "rock") {
-        userScore += 1;
-        console.log("You win! Paper beats rock.")
+
+    function playRound(userChoice, computerChoice) {
+
+        if (userChoice.toLowerCase() === computerChoice) {
+           console.log(`It's draw! Both you and computer chose ${computerChoice}.`)
+
+        } else if (userChoice.toLowerCase() === "rock" && computerChoice === "paper") {
+           computerScore += 1;
+           console.log('You lose! Paper beats rock.')
+
+        } else if (userChoice.toLowerCase() === "rock" && computerChoice === "scissors") {
+           userScore += 1;
+           console.log('You win! Rock beats scissors.')
+
+        } else if (userChoice.toLowerCase() === "scissors" && computerChoice === "rock") {
+           computerScore += 1;
+           console.log("You lose! Rock beats scissors.")
+
+        } else if (userChoice.toLowerCase() === "scissors" && computerChoice === "paper") {
+           userScore += 1;
+           console.log("You win! Scissors beat paper")
+
+        } else if (userChoice.toLowerCase() === "paper" && computerChoice === "scissors") {
+           computerScore += 1;
+           console.log("You lose! Scissors beats paper.")
+
+        } else if (userChoice.toLowerCase() === "paper" && computerChoice === "rock") {
+           userScore += 1;
+           console.log("You win! Paper beats rock.")
+        }
+
+    }
+    
+    if (userScore > computerScore) {
+        console.log(`You win! Your score is ${userScore} against computer's ${computerScore} points!`)
+    } else if (userScore === computerScore) {
+        console.log(`Draw! Your and computer's score are ${computerScore}.`)
+    } else if (userScore < computerScore) {
+        console.log(`You lose! Your score is ${userScore} against computer's ${computerScore} points!`)
     }
 
 }
 
-const userSelection = getUserChoice();
-const computerSelection = getComputerChoice();
-
-console.log(userSelection, computerSelection)
-
-playRound(userSelection, computerSelection);
-
-console.log(userScore, computerScore) 
+playGame();
