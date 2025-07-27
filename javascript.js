@@ -1,10 +1,8 @@
 
-function getComputerChoice() {
 
+function getComputerChoice() {
     function getRandomIntInclusive(min, max) {
-        const minCeiled = Math.ceil(min);
-        const maxFloored = Math.floor(max);
-        return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); //
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     const randomInteger = getRandomIntInclusive(1, 3);
@@ -21,13 +19,12 @@ function getComputerChoice() {
 }
 
 function getUserChoice() {
-
     let userChoice = prompt("Enter: rock, paper or scissors:", '');
 
     if (userChoice === null || userChoice === '') {
         alert("Canceled.");
     } else if (userChoice.toLowerCase() === "rock" || userChoice.toLowerCase() === "paper" || userChoice.toLowerCase() === "scissors") {
-        return userChoice;
+        return userChoice.toLowerCase();
     } else {
         alert("Invalid input.");
     }
@@ -63,32 +60,34 @@ function playGame() {
 
     function playRound(userChoice, computerChoice) {
 
-        if (userChoice.toLowerCase() === computerChoice) {
-           console.log(`It's draw! Both you and computer chose ${computerChoice}.`)
+        function capitalize(string) {
+            if (typeof string === 'string') {
+                let capitalizedChoice = string.at(0).toUpperCase() + string.slice(1).toLowerCase();
+                return capitalizedChoice;
+            } 
 
-        } else if (userChoice.toLowerCase() === "rock" && computerChoice === "paper") {
+        }
+
+        let capitalizedUserChoice = capitalize(userChoice);
+        let capitalizedComputerChoice = capitalize(computerChoice);
+
+        if (userChoice === computerChoice) {
+           console.log(`It's draw! Both you and computer choose ${computerChoice}.`)
+
+        } else if (userChoice === "rock" && computerChoice === "paper" || 
+            userChoice === "scissors" && computerChoice === "rock" ||
+            userChoice === "paper" && computerChoice === "scissors"
+        ) {
            computerScore += 1;
-           console.log('You lose! Paper beats rock.')
+           console.log(`You lose! ${capitalizedComputerChoice} beats ${userChoice}.`)
 
-        } else if (userChoice.toLowerCase() === "rock" && computerChoice === "scissors") {
+        } else if (userChoice === "rock" && computerChoice === "scissors" ||
+            userChoice === "scissors" && computerChoice === "paper" || 
+            userChoice === "paper" && computerChoice === "rock"
+        ) {
            userScore += 1;
-           console.log('You win! Rock beats scissors.')
+           console.log(`You win! ${capitalizedUserChoice} beats ${computerChoice}.`)
 
-        } else if (userChoice.toLowerCase() === "scissors" && computerChoice === "rock") {
-           computerScore += 1;
-           console.log("You lose! Rock beats scissors.")
-
-        } else if (userChoice.toLowerCase() === "scissors" && computerChoice === "paper") {
-           userScore += 1;
-           console.log("You win! Scissors beat paper")
-
-        } else if (userChoice.toLowerCase() === "paper" && computerChoice === "scissors") {
-           computerScore += 1;
-           console.log("You lose! Scissors beats paper.")
-
-        } else if (userChoice.toLowerCase() === "paper" && computerChoice === "rock") {
-           userScore += 1;
-           console.log("You win! Paper beats rock.")
         }
 
     }
